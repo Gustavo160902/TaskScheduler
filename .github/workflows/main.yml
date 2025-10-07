@@ -67,8 +67,6 @@ jobs:
           - "Scheduler_example25_SCHEDULER_CHAIN"
           - "Scheduler_example26_SCHEDULING_OPTIONS"
           - "Scheduler_example28_Tickless"
-          - "Scheduler_example29_NonArduino"
-          - "Scheduler_example30_TASK_THREAD_SAFE"
     # This is the platform GitHub will use to run our workflow,
     # I picked ubuntu.
     runs-on: ubuntu-latest
@@ -267,6 +265,7 @@ jobs:
         example: 
           - "Scheduler_example27_PlatformIO"
           - "Scheduler_example29_NonArduino"
+          - "Scheduler_example30_TASK_THREAD_SAFE"
         environment:
           - "esp32dev"
         include:
