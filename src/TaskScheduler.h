@@ -290,6 +290,12 @@ v4.0.0:
         - bug: incorrect behavior of the StatusRequest timeout functionality due to uninitialized timeout variable
         - update: addedd Doxygen comments to all methods and variables
          -update: added a number of compile and unit tests for CI/CD
+
+v4.0.1:
+    2025-10-07:
+        - bug: removed leftover iMutex variable
+        - added example30: _TASK_THREAD_SAFE
+
 */
 
 #include "TaskSchedulerDeclarations.h"
@@ -649,10 +655,6 @@ void Task::set(unsigned long aInterval, long aIterations, TaskCallback aCallback
     setInterval(aInterval);
     iSetIterations = aIterations;
     iIterations = aIterations;
-#ifdef _TASK_THREAD_SAFE
-    iMutex = iMutex - 1;
-#endif  // _TASK_THREAD_SAFE
-
 }
 
 /** Sets number of iterations for the task
@@ -660,16 +662,8 @@ void Task::set(unsigned long aInterval, long aIterations, TaskCallback aCallback
  * @param aIterations - number of iterations, use -1 for no limit
  */
 void Task::setIterations(long aIterations) {
-#ifdef _TASK_THREAD_SAFE
-    iMutex = iMutex + 1;
-#endif  // _TASK_THREAD_SAFE
-
     iSetIterations = aIterations;
     iIterations = aIterations;
-
-#ifdef _TASK_THREAD_SAFE
-    iMutex = iMutex - 1;
-#endif  // _TASK_THREAD_SAFE
 }
 
 #ifndef _TASK_OO_CALLBACKS

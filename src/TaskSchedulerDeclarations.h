@@ -125,8 +125,9 @@
  * For non-Arduino IDE platforms that require explicit CPP compilation.
  * 
  * @par _TASK_THREAD_SAFE
- * Enable additional checking for thread safety.
- * Uses an internal mutex to protect task scheduling methods from preemption.
+ * Enable additional functionality to request processing in a thread-safe manner.
+ * Uses a request queue to safely invoke task control methods from other threads or interrupts.
+ * Also enables basic mutex locking to prevent concurrent access issues.
  * Recommended for ESP32 and other MCUs running under preemptive schedulers like FreeRTOS.
  * 
  */
