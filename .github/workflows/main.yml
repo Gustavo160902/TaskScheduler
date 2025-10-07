@@ -265,7 +265,7 @@ jobs:
         example: 
           - "Scheduler_example27_PlatformIO"
           - "Scheduler_example29_NonArduino"
-          - "Scheduler_example30_TASK_THREAD_SAFE"
+          - "Scheduler_example30_THREAD_SAFE"
         environment:
           - "esp32dev"
         include:
