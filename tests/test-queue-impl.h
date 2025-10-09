@@ -13,4 +13,7 @@ size_t getQueueSize();
 // Maximum queue size constant
 extern const size_t MAX_QUEUE_SIZE;
 
+bool _task_dequeue_request(_task_request_t* req);
+bool _task_enqueue_request(_task_request_t* req);
+
 #endif // TEST_QUEUE_IMPL_H
