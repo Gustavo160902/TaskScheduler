@@ -6,6 +6,13 @@
 
 #include <cstddef>
 
+#define _TASK_HEADER_AND_CPP
+#define _TASK_THREAD_SAFE
+#define _TASK_STATUS_REQUEST
+#define _TASK_TIMEOUT_TASK_THREAD_SAFE
+
+#include "TaskSchedulerDeclarations.h"
+
 // Helper functions for testing
 void clearTaskRequestQueue();
 size_t getQueueSize();
