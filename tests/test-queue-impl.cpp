@@ -5,10 +5,7 @@
 #include "Arduino.h"
 
 // Define thread-safe features before including TaskScheduler
-#define _TASK_NON_ARDUINO
-#define _TASK_THREAD_SAFE
-#define _TASK_STATUS_REQUEST
-#define _TASK_TIMEOUT
+// defined in the test.yml
 #include "TaskSchedulerDeclarations.h"
 
 #include <thread>

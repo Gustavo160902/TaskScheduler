@@ -17,7 +17,7 @@
 
 #include <gtest/gtest.h>
 #include "Arduino.h"
-// #include "TaskScheduler.h"
+#include "TaskSchedulerDeclarations.h"
 #include "test-queue-impl.h"
 
 #include <thread>

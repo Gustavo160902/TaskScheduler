@@ -493,7 +493,7 @@ jobs:
           # Compiler definitions for Arduino compatibility and thread safety
           target_compile_definitions(test_thread_safe PRIVATE
               ARDUINO=300
-              _TASK_NON_ARDUINO
+              _TASK_HEADER_AND_CPP
               _TASK_THREAD_SAFE
               _TASK_STATUS_REQUEST
               _TASK_TIMEOUT
