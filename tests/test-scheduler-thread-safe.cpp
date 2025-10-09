@@ -267,7 +267,7 @@ TEST_F(ThreadSafeTest, WorkerThreadChangesInterval) {
         int idx = 0;
 
         while (worker_running && idx < 5) {
-            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            std::this_thread::sleep_for(std::chrono::milliseconds(intervals[idx]+5));
             ts.requestAction(&testTask, TASK_REQUEST_SETINTERVAL_1,
                            intervals[idx], 0, 0, 0, 0);
             idx++;
