@@ -479,6 +479,7 @@ jobs:
           # Create the thread-safe test executable
           add_executable(test_thread_safe
               tests/test-scheduler-thread-safe.cpp
+              tests/test-queue-impl.cpp
               ${TASKSCHEDULER_SOURCES}
           )
 
@@ -492,6 +493,7 @@ jobs:
           # Compiler definitions for Arduino compatibility and thread safety
           target_compile_definitions(test_thread_safe PRIVATE
               ARDUINO=300
+              _TASK_NON_ARDUINO
               _TASK_THREAD_SAFE
               _TASK_STATUS_REQUEST
               _TASK_TIMEOUT

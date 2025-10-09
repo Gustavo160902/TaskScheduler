@@ -17,97 +17,14 @@
 
 #include <gtest/gtest.h>
 #include "Arduino.h"
-
-// Define thread-safe features before including TaskScheduler
-#define _TASK_THREAD_SAFE
-#define _TASK_STATUS_REQUEST
-#define _TASK_TIMEOUT
-#include "TaskScheduler.h"
+// #include "TaskScheduler.h"
+#include "test-queue-impl.h"
 
 #include <thread>
-#include <mutex>
-#include <queue>
 #include <atomic>
-#include <condition_variable>
-
-// ============================================
-// Thread-Safe Queue Implementation for Linux
-// ============================================
-
-// Queue for task requests
-std::queue<_task_request_t> taskRequestQueue;
-std::mutex queueMutex;
-std::condition_variable queueCV;
-const size_t MAX_QUEUE_SIZE = 100;
 
 // Thread-local storage to simulate ISR context
 thread_local bool isInISRContext = false;
-
-/**
- * @brief Enqueue a task request (Linux implementation)
- *
- * Thread-safe enqueue operation using std::mutex.
- * Simulates FreeRTOS queue behavior for Linux testing.
- *
- * @param req Pointer to the request structure
- * @return true if enqueued successfully, false if queue is full
- */
-bool _task_enqueue_request(_task_request_t* req) {
-    std::unique_lock<std::mutex> lock(queueMutex);
-
-    // Check queue size limit
-    if (taskRequestQueue.size() >= MAX_QUEUE_SIZE) {
-        return false;  // Queue full
-    }
-
-    // Add request to queue
-    taskRequestQueue.push(*req);
-
-    // Notify waiting threads
-    queueCV.notify_one();
-
-    return true;
-}
-
-/**
- * @brief Dequeue a task request (Linux implementation)
- *
- * Thread-safe dequeue operation. Non-blocking for scheduler.
- *
- * @param req Pointer to store the dequeued request
- * @return true if request dequeued, false if queue empty
- */
-bool _task_dequeue_request(_task_request_t* req) {
-    std::unique_lock<std::mutex> lock(queueMutex);
-
-    if (taskRequestQueue.empty()) {
-        return false;  // No requests
-    }
-
-    // Get request from queue
-    *req = taskRequestQueue.front();
-    taskRequestQueue.pop();
-
-    return true;
-}
-
-/**
- * @brief Helper to clear the queue between tests
- */
-void clearTaskRequestQueue() {
-    std::unique_lock<std::mutex> lock(queueMutex);
-    while (!taskRequestQueue.empty()) {
-        taskRequestQueue.pop();
-    }
-}
-
-/**
- * @brief Helper to get current queue size
- */
-size_t getQueueSize() {
-    std::unique_lock<std::mutex> lock(queueMutex);
-    return taskRequestQueue.size();
-}
 
 // ============================================
 // Global Test State
@@ -475,7 +392,7 @@ TEST_F(ThreadSafeTest, QueueOverflowHandling) {
     int successful = 0;
     int failed = 0;
 
-    for (int i = 0; i < MAX_QUEUE_SIZE + 50; i++) {
+    for (size_t i = 0; i < MAX_QUEUE_SIZE + 50; i++) {
         if (ts.requestAction(&testTask, TASK_REQUEST_SETINTERVAL_1, i, 0, 0, 0, 0)) {
             successful++;
         } else {
