@@ -15,6 +15,11 @@
 // - Simulates ISR context using thread-local storage
 // - Compatible with Google Test framework on Ubuntu
 
+#define _TASK_HEADER_AND_CPP
+#define _TASK_THREAD_SAFE
+#define _TASK_STATUS_REQUEST
+#define _TASK_TIMEOUT
+
 #include <gtest/gtest.h>
 #include "Arduino.h"
 #include "TaskSchedulerDeclarations.h"

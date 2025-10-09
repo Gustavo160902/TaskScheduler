@@ -6,6 +6,11 @@
 
 // Define thread-safe features before including TaskScheduler
 // defined in the test.yml
+#define _TASK_HEADER_AND_CPP
+#define _TASK_THREAD_SAFE
+#define _TASK_STATUS_REQUEST
+#define _TASK_TIMEOUT_TASK_THREAD_SAFE
+
 #include "test-queue-impl.h"
 #include "TaskSchedulerDeclarations.h"
 
