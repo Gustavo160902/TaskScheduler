@@ -1,6 +1,6 @@
 /*
 Cooperative multitasking library for Arduino
-Copyright (c) 2015-2024 Anatoli Arkhipenko
+Copyright (c) 2015-2025 Anatoli Arkhipenko
 
 Changelog:
 v1.0.0:
@@ -295,6 +295,10 @@ v4.0.1:
     2025-10-07:
         - bug: removed leftover iMutex variable
         - added example30: _TASK_THREAD_SAFE
+
+v4.0.2:
+    2025-10-09:
+        - added unit test for _TASK_THREAD_SAFE functionality
 
 */
 
