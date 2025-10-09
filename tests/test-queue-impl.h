@@ -11,7 +11,7 @@ void clearTaskRequestQueue();
 size_t getQueueSize();
 
 // Maximum queue size constant
-extern const size_t MAX_QUEUE_SIZE;
+#define MAX_QUEUE_SIZE 100
 
 bool _task_dequeue_request(_task_request_t* req);
 bool _task_enqueue_request(_task_request_t* req);

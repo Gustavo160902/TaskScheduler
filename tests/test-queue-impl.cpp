@@ -6,6 +6,7 @@
 
 // Define thread-safe features before including TaskScheduler
 // defined in the test.yml
+#include "test-queue-impl.h"
 #include "TaskSchedulerDeclarations.h"
 
 #include <thread>
@@ -21,7 +22,7 @@
 std::queue<_task_request_t> taskRequestQueue;
 std::mutex queueMutex;
 std::condition_variable queueCV;
-const size_t MAX_QUEUE_SIZE = 100;
+
 
 /**
  * @brief Enqueue a task request (Linux implementation)
